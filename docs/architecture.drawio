@@ -1,0 +1,97 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0" version="28.2.5">
+  <diagram id="arch" name="Architecture">
+    <mxGraphModel dx="967" dy="775" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Banking Microservices – Architecture (Config Server + Database-per-Service)" style="text;html=1;strokeColor=none;fillColor=none;fontSize=20;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="260" y="10" width="1400" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="git" value="GitHub Config Repo&#xa;(banking-config-repo/config)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="760" y="60" width="400" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="configServer" value="Config Server&#xa;Spring Cloud (port 8888)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="840" y="160" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="postman" value="Postman / External Client (REST)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="200" y="560" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="servicesLabel" value="Microservices (WebFlux + Reactive Mongo + Spring Cloud Config)" style="text;html=1;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="680" y="240" width="560" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="customer" value="Customer Service&#xa;port: 8081&#xa;DB: customersdb" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="300" y="300" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="account" value="Account Service&#xa;port: 8082&#xa;DB: accountsdb" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="580" y="300" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="credit" value="Credit Service&#xa;port: 8083&#xa;DB: creditsdb" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="860" y="300" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="card" value="Card Service&#xa;port: 8084&#xa;DB: cardsdb" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="1140" y="300" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="transaction" value="Transaction Service&#xa;port: 8085&#xa;DB: transactionsdb" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="1420" y="300" width="260" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="mongoLabel" value="MongoDB (localhost:27017) – Database per Service" style="text;html=1;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="780" y="420" width="420" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="mongo" value="MongoDB Instance&#xa;• customersdb&#xa;• accountsdb&#xa;• creditsdb&#xa;• cardsdb&#xa;• transactionsdb" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="800" y="460" width="380" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-git-config" style="endArrow=block;strokeColor=#6c8ebf;" parent="1" source="git" target="configServer" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-conf-customer" style="endArrow=block;strokeColor=#d6b656;" parent="1" source="configServer" target="customer" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-conf-account" style="endArrow=block;strokeColor=#d6b656;" parent="1" source="configServer" target="account" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-conf-credit" style="endArrow=block;strokeColor=#d6b656;" parent="1" source="configServer" target="credit" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-conf-card" style="endArrow=block;strokeColor=#d6b656;" parent="1" source="configServer" target="card" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-conf-transaction" style="endArrow=block;strokeColor=#d6b656;" parent="1" source="configServer" target="transaction" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-postman-customer" style="endArrow=block;strokeColor=#b85450;" parent="1" source="postman" target="customer" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-postman-account" style="endArrow=block;strokeColor=#b85450;" parent="1" source="postman" target="account" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-postman-credit" style="endArrow=block;strokeColor=#b85450;" parent="1" source="postman" target="credit" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-postman-card" style="endArrow=block;strokeColor=#b85450;" parent="1" source="postman" target="card" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-postman-transaction" style="endArrow=block;strokeColor=#b85450;" parent="1" source="postman" target="transaction" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-customer-mongo" style="endArrow=block;strokeColor=#82b366;" parent="1" source="customer" target="mongo" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-account-mongo" style="endArrow=block;strokeColor=#82b366;" parent="1" source="account" target="mongo" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-credit-mongo" style="endArrow=block;strokeColor=#82b366;" parent="1" source="credit" target="mongo" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-card-mongo" style="endArrow=block;strokeColor=#82b366;" parent="1" source="card" target="mongo" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-transaction-mongo" style="endArrow=block;strokeColor=#82b366;" parent="1" source="transaction" target="mongo" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="note1" value="Notes:&#xa;• Spring Boot 3.5.x (Java 17)&#xa;• WebFlux + Reactive MongoDB&#xa;• Spring Cloud Config (centralized properties)&#xa;• Database per service&#xa;• Tested with Postman via REST" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;size=20;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="60" y="60" width="420" height="160" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
