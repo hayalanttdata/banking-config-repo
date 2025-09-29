@@ -1,21 +1,7 @@
-spring:
-  application:
-    name: account-service
+server:
+  port: 8082
 
-domain:
-  account:
-    savings:
-      maintenanceFee: 0.0
-      maxMonthlyMovements: 10
-      maxPerCustomer: 1
-    current:
-      maintenanceFee: 12.0
-      maxMonthlyMovements: -1
-      business:
-        allowMultiple: true
-        minHolders: 1
-        allowAuthorizedSigners: true
-    fixedTerm:
-      maintenanceFee: 0.0
-      allowedMovementDay: 15
-      maxPerCustomer: -1
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/accountsdb

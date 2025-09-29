@@ -1,12 +1,7 @@
-spring:
-  application:
-    name: credit-service
+server:
+  port: 8083
 
-domain:
-  credit:
-    personal:
-      maxCreditsPerCustomer: 1
-    enterprise:
-      maxCreditsPerCompany: -1
-  payment:
-    enabled: true
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/creditsdb

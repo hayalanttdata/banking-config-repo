@@ -13,7 +13,10 @@ spring:
           uri: https://github.com/hayalanttdata/banking-config-repo
           default-label: main
           search-paths:
-            - config
+            - ""            # raíz del repo
+            - config        # archivos por servicio o global
+            - services      # configs por servicio
+            - services/*    # subcarpetas (account-service, etc.)
 
 management:
   endpoints:

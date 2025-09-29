@@ -19,7 +19,7 @@
 
     <properties>
         <java.version>17</java.version>
-        <spring-cloud.version>2024.0.4</spring-cloud.version>
+        <spring-cloud.version>2025.0.0</spring-cloud.version>
     </properties>
 
     <dependencyManagement>
@@ -35,14 +35,17 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- Config Server (lado servidor) -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-server</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

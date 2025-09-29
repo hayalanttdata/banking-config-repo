@@ -1,14 +1,7 @@
+server:
+  port: 8084
+
 spring:
-  application:
-    name: card-service
-
-domain:
-  card:
-    supportedTypes: [PERSONAL, ENTERPRISE]
-    limits:
-      defaultCreditLimit: 5000
-    spending:
-      enableCharges: true
-
-queries:
-  allowBalanceInquiry: true
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/cardsdb

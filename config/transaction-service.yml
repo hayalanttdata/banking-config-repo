@@ -1,12 +1,7 @@
-spring:
-  application:
-    name: transaction-service
+server:
+  port: 8085
 
-domain:
-  operations:
-    deposit: { enabled: true }
-    withdrawal: { enabled: true }
-    creditPayment: { enabled: true }
-  queries:
-    allowBalanceInquiry: true
-    allowMovementsInquiry: true
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/transactionsdb
