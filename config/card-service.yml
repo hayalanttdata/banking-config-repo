@@ -1,14 +1,17 @@
 server:
   port: 8084
+
 spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/cardsdb
+
 management:
   endpoints:
     web:
       exposure:
         include: health,info
+
 logging:
   level:
     root: INFO

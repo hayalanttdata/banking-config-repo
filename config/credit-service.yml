@@ -1,14 +1,17 @@
 server:
   port: 8083
+
 spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/creditsdb
+
 management:
   endpoints:
     web:
       exposure:
         include: health,info
+
 logging:
   level:
     root: INFO

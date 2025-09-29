@@ -1,3 +1,13 @@
+------------------------------
+
+customer-service → 8081
+account-service → 8082
+credit-service → 8083
+card-service → 8084
+transaction-service → 8085
+
+----------------
+
 cd services\config-server
 mvn spring-boot:run
 
@@ -102,7 +112,39 @@ Content-Type: application/json
 
 git status
 git add .
-git commit -m "crud finished with fixes in reactive programming"
+git commit -m "crud touches fixes crud ms in reactive programming"
 git push origin main
 
 
+
+---------------------
+
+El endpoint de Swagger UI queda así:
+
+http://localhost:8081/swagger-ui.html
+ → Para customer-service
+http://localhost:8082/swagger-ui.html
+ → Para account-service
+http://localhost:8083/swagger-ui.html
+ → Para credit-service
+http://localhost:8084/swagger-ui.html
+ → Para card-service
+http://localhost:8085/swagger-ui.html
+ → Para transaction-service
+
+Y el endpoint OpenAPI (JSON de la especificación):
+
+http://localhost:8081/v3/api-docs
+ (customer-service)
+
+http://localhost:8082/v3/api-docs
+ (account-service)
+
+http://localhost:8083/v3/api-docs
+ (credit-service)
+
+http://localhost:8084/v3/api-docs
+ (card-service)
+
+http://localhost:8085/v3/api-docs
+ (transaction-service)

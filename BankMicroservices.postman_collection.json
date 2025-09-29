@@ -1,0 +1,171 @@
+{
+  "info": {
+    "name": "Banking Microservices",
+    "_postman_id": "6e9a5b18-7d71-4c5f-b10a-99f2c3b56d44",
+    "description": "Colección Postman para probar todos los microservicios del sistema bancario (Config, Customers, Accounts, Credits, Cards, Transactions).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Config Server",
+      "item": [
+        {
+          "name": "Health",
+          "request": { "method": "GET", "url": "http://localhost:8888/actuator/health" }
+        },
+        {
+          "name": "Customer Config",
+          "request": { "method": "GET", "url": "http://localhost:8888/customer-service/default" }
+        },
+        {
+          "name": "Account Config",
+          "request": { "method": "GET", "url": "http://localhost:8888/account-service/default" }
+        }
+      ]
+    },
+    {
+      "name": "Customer Service",
+      "item": [
+        { "name": "Get All Customers", "request": { "method": "GET", "url": "http://localhost:8081/api/v1/customers" } },
+        { "name": "Get Customer by Id", "request": { "method": "GET", "url": "http://localhost:8081/api/v1/customers/{{customerId}}" } },
+        {
+          "name": "Create Customer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"name\": \"Pedro\", \"type\": \"PERSONAL\", \"documentNumber\": \"DNI-464\" }"
+            },
+            "url": "http://localhost:8081/api/v1/customers"
+          }
+        },
+        {
+          "name": "Update Customer",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"name\": \"Pedro G\", \"type\": \"BUSINESS\", \"documentNumber\": \"RUC-999\" }" },
+            "url": "http://localhost:8081/api/v1/customers/{{customerId}}"
+          }
+        },
+        { "name": "Delete Customer", "request": { "method": "DELETE", "url": "http://localhost:8081/api/v1/customers/{{customerId}}" } }
+      ]
+    },
+    {
+      "name": "Account Service",
+      "item": [
+        { "name": "Get All Accounts", "request": { "method": "GET", "url": "http://localhost:8082/api/v1/accounts" } },
+        { "name": "Get Account by Id", "request": { "method": "GET", "url": "http://localhost:8082/api/v1/accounts/{{accountId}}" } },
+        {
+          "name": "Create Account",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"customerId\": \"CUST-1\", \"accountType\": \"SAVINGS\", \"balance\": 500.00, \"monthlyMovementLimit\": 10 }"
+            },
+            "url": "http://localhost:8082/api/v1/accounts"
+          }
+        },
+        {
+          "name": "Deposit",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"amount\": 100 }" },
+            "url": "http://localhost:8082/api/v1/accounts/{{accountId}}/deposit"
+          }
+        },
+        {
+          "name": "Withdraw",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"amount\": 50 }" },
+            "url": "http://localhost:8082/api/v1/accounts/{{accountId}}/withdraw"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Credit Service",
+      "item": [
+        { "name": "Get All Credits", "request": { "method": "GET", "url": "http://localhost:8083/api/v1/credits" } },
+        { "name": "Get Credit by Id", "request": { "method": "GET", "url": "http://localhost:8083/api/v1/credits/{{creditId}}" } },
+        {
+          "name": "Create Credit",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"customerId\": \"CUST-1\", \"creditType\": \"PERSONAL\", \"amount\": 2000.00, \"remaining\": 2000.00 }" },
+            "url": "http://localhost:8083/api/v1/credits"
+          }
+        },
+        {
+          "name": "Pay Credit",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"amount\": 500 }" },
+            "url": "http://localhost:8083/api/v1/credits/{{creditId}}/pay"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Card Service",
+      "item": [
+        { "name": "Get All Cards", "request": { "method": "GET", "url": "http://localhost:8084/api/v1/cards" } },
+        { "name": "Get Card by Id", "request": { "method": "GET", "url": "http://localhost:8084/api/v1/cards/{{cardId}}" } },
+        {
+          "name": "Create Card",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"customerId\": \"CUST-1\", \"cardType\": \"PERSONAL\", \"creditLimit\": 5000.00, \"balance\": 0.00 }" },
+            "url": "http://localhost:8084/api/v1/cards"
+          }
+        },
+        {
+          "name": "Charge Card",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"amount\": 300 }" },
+            "url": "http://localhost:8084/api/v1/cards/{{cardId}}/charge"
+          }
+        },
+        {
+          "name": "Pay Card",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"amount\": 100 }" },
+            "url": "http://localhost:8084/api/v1/cards/{{cardId}}/pay"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Transaction Service",
+      "item": [
+        { "name": "Get All Transactions", "request": { "method": "GET", "url": "http://localhost:8085/api/v1/transactions" } },
+        { "name": "Get Transaction by Id", "request": { "method": "GET", "url": "http://localhost:8085/api/v1/transactions/{{transactionId}}" } },
+        {
+          "name": "Create Transaction",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"productId\": \"ACC-1\", \"productType\": \"ACCOUNT\", \"operation\": \"DEPOSIT\", \"amount\": 150.00 }"
+            },
+            "url": "http://localhost:8085/api/v1/transactions"
+          }
+        }
+      ]
+    }
+  ]
+}
