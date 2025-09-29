@@ -4,5 +4,105 @@ mvn spring-boot:run
 http://localhost:8888/actuator/health → {"status":"UP"}
 http://localhost:8888/customer-service/default →  YAML remoto.
 
+-----------------
 cd services\customer-service
 mvn spring-boot:run
+
+GET 
+http://localhost:8081/api/v1/customers
+
+POST 
+http://localhost:8081/api/v1/customers
+
+Content-Type: application/json
+
+{ "name": "Pedro", "type": "EMPRESARIAL", "documentNumber": "DNI-464" }
+
+-----------------------
+
+cd services\account-service
+mvn spring-boot:run
+
+GET 
+http://localhost:8082/api/v1/accounts
+
+POST 
+http://localhost:8082/api/v1/accounts
+Content-Type: application/json
+
+{
+  "customerId": "123",
+  "accountType": "SAVINGS",
+  "balance": 500.00,
+  "monthlyMovementLimit": 10
+}
+
+--------------------------------------
+
+cd services\credit-service
+mvn spring-boot:run
+
+GET 
+http://localhost:8083/api/v1/credits
+
+POST 
+http://localhost:8083/api/v1/credits
+
+Content-Type: application/json
+
+{
+  "customerId": "123",
+  "creditType": "PERSONAL",
+  "amount": 2000.00,
+  "remaining": 2000.00
+}
+
+---------------------
+
+cd services\card-service
+mvn spring-boot:run
+
+GET
+http://localhost:8084/api/v1/cards
+
+POST 
+http://localhost:8084/api/v1/cards
+
+Content-Type: application/json
+
+{
+  "customerId": "123",
+  "cardType": "PERSONAL",
+  "creditLimit": 5000.00,
+  "balance": 0.00
+}
+
+---------------------
+
+cd services\transaction-service
+mvn spring-boot:run
+
+GET 
+http://localhost:8085/api/v1/transactions
+
+POST 
+http://localhost:8085/api/v1/transactions
+
+Content-Type: application/json
+
+{
+  "productId": "123",
+  "productType": "ACCOUNT",
+  "operation": "DEPOSIT",
+  "amount": 150.00
+}
+
+
+
+
+git status
+git add .
+git commit -m "crud finished with fixes in reactive programming"
+git push origin main
+
+
