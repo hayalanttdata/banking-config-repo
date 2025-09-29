@@ -29,6 +29,6 @@ public class TransactionService {
     public Mono<Void> delete(String id) { return repository.deleteById(id); }
 
     public Flux<Transaction> findByProduct(String productId) {
-        return repository.findByProductIdOrderByTimestampDesc(productId);
+        return repository.findByProductIdOrderByOccurredAtDesc(productId);
     }
 }

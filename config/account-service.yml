@@ -16,3 +16,22 @@ logging:
   level:
     root: INFO
     com.nttdata: DEBUG
+
+rules:
+  opening:
+    minimum:
+      SAVINGS: 0
+      CURRENT: 0
+      FIXED_TERM: 100
+  freeTransactions:
+    SAVINGS: 10
+    CURRENT: 20
+    FIXED_TERM: 0
+  transactionFee:
+    SAVINGS: 1.50
+    CURRENT: 1.00
+    FIXED_TERM: 2.00
+  vip:
+    minDailyAvg: 1500.00  # promedio diario mínimo/mes
+  pyme:
+    maintenanceFee: 0.00  # sin comisión para PYME
