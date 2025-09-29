@@ -4,12 +4,15 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Document(collection = "customers")
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class Customer {
     @Id
     private String id;
     private String name;
-    private String type; // PERSONAL or BUSINESS
+    private String type; // PERSONAL, EMPRESARIAL, etc.
     private String documentNumber;
 }
