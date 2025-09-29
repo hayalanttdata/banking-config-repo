@@ -1,7 +1,12 @@
 spring:
   application:
-    name: customer-service
+    name: credit-service
 
 domain:
-  customer:
-    types: [PERSONAL, ENTERPRISE]
+  credit:
+    personal:
+      maxCreditsPerCustomer: 1
+    enterprise:
+      maxCreditsPerCompany: -1
+  payment:
+    enabled: true
