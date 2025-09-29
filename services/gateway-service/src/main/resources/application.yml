@@ -1,0 +1,45 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: gateway-service
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true       # Rutas dinámicas con Eureka
+          lower-case-service-id: true
+      routes:                 # Rutas explícitas (opcional, además del locator)
+        - id: customer-service
+          uri: lb://customer-service
+          predicates:
+            - Path=/customer-service/**
+        - id: account-service
+          uri: lb://account-service
+          predicates:
+            - Path=/account-service/**
+        - id: credit-service
+          uri: lb://credit-service
+          predicates:
+            - Path=/credit-service/**
+        - id: card-service
+          uri: lb://card-service
+          predicates:
+            - Path=/card-service/**
+        - id: transaction-service
+          uri: lb://transaction-service
+          predicates:
+            - Path=/transaction-service/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
