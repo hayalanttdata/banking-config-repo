@@ -1,15 +1,15 @@
-# transaction-service.yml
 server:
   port: 8085
 spring:
-  application:
-    name: transaction-service
   data:
     mongodb:
       uri: mongodb://localhost:27017/transactionsdb
 management:
   endpoints:
-    web.exposure.include: health,info
-logging.level:
-  root: INFO
-  com.nttdata: DEBUG
+    web:
+      exposure:
+        include: health,info
+logging:
+  level:
+    root: INFO
+    com.nttdata: DEBUG

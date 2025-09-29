@@ -1,15 +1,18 @@
-# account-service.yml
 server:
   port: 8082
+
 spring:
-  application:
-    name: account-service
   data:
     mongodb:
       uri: mongodb://localhost:27017/accountsdb
+
 management:
   endpoints:
-    web.exposure.include: health,info
-logging.level:
-  root: INFO
-  com.nttdata: DEBUG
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  level:
+    root: INFO
+    com.nttdata: DEBUG

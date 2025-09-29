@@ -1,0 +1,8 @@
+cd services\config-server
+mvn spring-boot:run
+
+http://localhost:8888/actuator/health → {"status":"UP"}
+http://localhost:8888/customer-service/default →  YAML remoto.
+
+cd services\customer-service
+mvn spring-boot:run

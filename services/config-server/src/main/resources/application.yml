@@ -5,7 +5,7 @@ spring:
   application:
     name: config-server
   profiles:
-    active: native   # usa tu carpeta local /config
+    active: native
 
 ---
 spring:
@@ -16,13 +16,11 @@ spring:
     config:
       server:
         native:
-          search-locations: file:///C:/Users/hayalahu/Downloads/Proyecto_final_Bootcamp/banking-config-repo/config
+          # RUTA ABSOLUTA A LA CARPETA "config"
+          search-locations: file:C:/Users/hayalahu/Downloads/Proyecto_final_Bootcamp/banking-config-repo/config
 
 management:
   endpoints:
     web:
       exposure:
         include: health,info
-  endpoint:
-    health:
-      show-details: always
