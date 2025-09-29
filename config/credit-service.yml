@@ -2,6 +2,8 @@ server:
   port: 8083
 
 spring:
+  application:
+    name: credit-service
   data:
     mongodb:
       uri: mongodb://localhost:27017/creditsdb

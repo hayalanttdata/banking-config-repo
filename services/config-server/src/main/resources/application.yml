@@ -5,7 +5,33 @@ spring:
   application:
     name: config-server
   profiles:
-    active: git
+    active: native   # ? para desarrollo local. Cambia a 'git' cuando quieras leer de GitHub.
+
+---
+spring:
+  config:
+    activate:
+      on-profile: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:C:/Users/hayalahu/Downloads/Proyecto_final_Bootcamp/banking-config-repo/config
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+---
+spring:
+  config:
+    activate:
+      on-profile: git
   cloud:
     config:
       server:
@@ -13,13 +39,16 @@ spring:
           uri: https://github.com/hayalanttdata/banking-config-repo
           default-label: main
           search-paths:
-            - ""            # raíz del repo
-            - config        # archivos por servicio o global
-            - services      # configs por servicio
-            - services/*    # subcarpetas (account-service, etc.)
+            - ""         # raíz por si dejas algo global
+            - config     # yml por servicio
+            - services
+            - services/*
 
 management:
   endpoints:
     web:
       exposure:
         include: health,info
+  endpoint:
+    health:
+      show-details: always
