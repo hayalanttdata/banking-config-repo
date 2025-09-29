@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: transaction-service
+
+domain:
+  operations:
+    deposit: { enabled: true }
+    withdrawal: { enabled: true }
+    creditPayment: { enabled: true }
+  queries:
+    allowBalanceInquiry: true
+    allowMovementsInquiry: true

@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: customer-service
+
+domain:
+  customer:
+    types: [PERSONAL, ENTERPRISE]
