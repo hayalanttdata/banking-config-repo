@@ -1,0 +1,23 @@
+%% credit-seq.mmd
+sequenceDiagram
+    autonumber
+    participant PM as Postman/Client
+    participant CR as Credit Service
+    participant DB as Mongo (creditsdb)
+
+    Note over PM,CR: Create Credit
+
+    PM->>CR: POST /api/v1/credits {customerId,type,limit,...}
+    CR->>DB: count/find credits for customerId (type=PERSONAL)
+    DB-->>CR: result
+    CR-->>PM: 400 si ya tiene uno (PERSONAL)
+    CR->>DB: insertOne(credit) **if valid**
+    DB-->>CR: ack + creditId
+    CR-->>PM: 201 Created
+
+    Note over PM,CR: Pay Credit
+
+    PM->>CR: POST /api/v1/credits/{id}/payments {amount}
+    CR->>DB: update outstanding (-amount) + movement
+    DB-->>CR: ack
+    CR-->>PM: 200 OK

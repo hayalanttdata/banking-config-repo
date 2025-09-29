@@ -1,0 +1,28 @@
+%% customer-seq.mmd
+sequenceDiagram
+    autonumber
+    participant PM as Postman/Client
+    participant CS as Customer Service
+    participant DB as Mongo (customersdb)
+
+    Note over PM,CS: Create Customer (CRUD)
+
+    PM->>CS: POST /api/v1/customers {customer}
+    CS->>DB: insertOne(customer)
+    DB-->>CS: ack + _id
+    CS-->>PM: 201 Created + body
+
+    PM->>CS: GET /api/v1/customers/{id}
+    CS->>DB: findById(id)
+    DB-->>CS: Customer
+    CS-->>PM: 200 OK + Customer
+
+    PM->>CS: PUT /api/v1/customers/{id} {patch}
+    CS->>DB: save(updatedCustomer)
+    DB-->>CS: ack
+    CS-->>PM: 200 OK
+
+    PM->>CS: DELETE /api/v1/customers/{id}
+    CS->>DB: deleteById(id)
+    DB-->>CS: ack
+    CS-->>PM: 204 No Content

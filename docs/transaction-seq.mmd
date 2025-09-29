@@ -1,0 +1,18 @@
+%% transaction-seq.mmd
+sequenceDiagram
+    autonumber
+    participant PM as Postman/Client
+    participant TS as Transaction Service
+    participant DB as Mongo (transactionsdb)
+    participant AS as Account Service
+
+    Note over PM,TS: Transfer between accounts
+
+    PM->>TS: POST /api/v1/transactions/transfer {from,to,amount}
+    TS->>AS: POST /api/v1/accounts/{from}/withdraw {amount}
+    AS-->>TS: 200 OK or error (insufficient funds/rules)
+    TS->>AS: POST /api/v1/accounts/{to}/deposit {amount}
+    AS-->>TS: 200 OK
+    TS->>DB: insertOne(transaction record)
+    DB-->>TS: ack
+    TS-->>PM: 200 OK or rollback if any step failed

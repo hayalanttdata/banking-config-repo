@@ -1,0 +1,29 @@
+%% account-seq.mmd
+sequenceDiagram
+    autonumber
+    participant PM as Postman/Client
+    participant AS as Account Service
+    participant DB as Mongo (accountsdb)
+
+    Note over PM,AS: Open Account (validaciones de negocio)
+
+    PM->>AS: POST /api/v1/accounts {customerId,type,holders,...}
+    AS->>DB: count/find accounts by customerId + type
+    DB-->>AS: result
+    AS-->>PM: 400 si viola reglas (p.ej. personal >1 savings/checking)
+    AS->>DB: insertOne(account) **only if valid**
+    DB-->>AS: ack + accountId
+    AS-->>PM: 201 Created
+
+    Note over PM,AS: Deposit / Withdraw
+
+    PM->>AS: POST /api/v1/accounts/{id}/deposit {amount}
+    AS->>DB: update balance (+amount) + register movement (fecha)
+    DB-->>AS: ack
+    AS-->>PM: 200 OK
+
+    PM->>AS: POST /api/v1/accounts/{id}/withdraw {amount}
+    AS->>DB: check rules (monthly limit, day for time-deposit, etc.)
+    AS->>DB: update balance (-amount) + movement
+    DB-->>AS: ack
+    AS-->>PM: 200 OK or 400/409 on rule violation

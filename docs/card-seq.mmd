@@ -1,0 +1,28 @@
+%% card-seq.mmd
+sequenceDiagram
+    autonumber
+    participant PM as Postman/Client
+    participant CA as Card Service
+    participant DB as Mongo (cardsdb)
+
+    Note over PM,CA: Create Credit Card
+
+    PM->>CA: POST /api/v1/cards {customerId, type, creditLimit}
+    CA->>DB: insertOne(card {available=limit, balance=0})
+    DB-->>CA: ack + cardId
+    CA-->>PM: 201 Created
+
+    Note over PM,CA: Charge Purchase
+
+    PM->>CA: POST /api/v1/cards/{id}/charges {amount}
+    CA->>DB: check available >= amount
+    CA->>DB: update balance(+amount), available(-amount), movement
+    DB-->>CA: ack
+    CA-->>PM: 200 OK or 409 if over limit
+
+    Note over PM,CA: Pay Card
+
+    PM->>CA: POST /api/v1/cards/{id}/payments {amount}
+    CA->>DB: update balance(-amount), available(+amount), movement
+    DB-->>CA: ack
+    CA-->>PM: 200 OK
