@@ -17,21 +17,29 @@ logging:
     root: INFO
     com.nttdata: DEBUG
 
+# URL del microservicio de tarjetas (para validar VIP/PYME que requieren tarjeta de crédito)
+# Si usas Eureka + Gateway, esto puede ser http://card-service (via discovery)
+services:
+  card:
+    base-url: http://localhost:8084
+
 rules:
   opening:
     minimum:
       SAVINGS: 0
-      CURRENT: 0
+      CHECKING: 0       # <- antes decía CURRENT; debe coincidir con tu enum/tipo real
       FIXED_TERM: 100
   freeTransactions:
     SAVINGS: 10
-    CURRENT: 20
+    CHECKING: 20       # <- idem
     FIXED_TERM: 0
   transactionFee:
     SAVINGS: 1.50
-    CURRENT: 1.00
+    CHECKING: 1.00     # <- idem
     FIXED_TERM: 2.00
   vip:
-    minDailyAvg: 1500.00  # promedio diario mínimo/mes
+    minDailyAvg: 1500.00       # promedio diario mínimo mensual (SAVINGS)
+    requiresCreditCard: true   # debe tener tarjeta de crédito al crear la cuenta
   pyme:
-    maintenanceFee: 0.00  # sin comisión para PYME
+    maintenanceFee: 0.00       # sin comisión mantenimiento para CHECKING
+    requiresCreditCard: true   # debe tener tarjeta de crédito al crear la cuenta

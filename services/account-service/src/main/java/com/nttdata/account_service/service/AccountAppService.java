@@ -48,8 +48,10 @@ public class AccountAppService {
     public Mono<Account> create(Account input) {
         // reglas de dominio (mínimos, VIP/PYME, etc.)
         return domain.validateCreation(input)
-                .flatMap(accountRepository::save)
+                .flatMap((Account -> accountRepository.save(Acount))
+                //.flatMap(accountRepository::save)
                 .doOnSuccess(a -> log.info("Account created: {}", a.getId()));
+
     }
 
     public Mono<Account> update(String id, Account patch) {
