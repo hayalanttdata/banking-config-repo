@@ -1,9 +1,15 @@
+# credit-service.yml
 server:
   port: 8083
-
 spring:
   application:
     name: credit-service
   data:
     mongodb:
       uri: mongodb://localhost:27017/creditsdb
+management:
+  endpoints:
+    web.exposure.include: health,info
+logging.level:
+  root: INFO
+  com.nttdata: DEBUG

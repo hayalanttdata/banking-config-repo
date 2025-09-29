@@ -1,18 +1,5 @@
-server:
-  port: 8081
-
 spring:
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/customersdb
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info
-
-logging:
-  level:
-    root: INFO
-    com.nttdata: DEBUG
+  application:
+    name: customer-service
+  config:
+    import: "optional:configserver:http://localhost:8888"
